@@ -1,37 +1,36 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Pregnant or Just Pudgy? 🐱
 
-## Getting Started
+Welcome to the "Pregnant or Just Pudgy?" quiz game, where you'll test your cat-interpretation skills to the limit! Is that fluffy feline expecting kittens, or did it just have an extra-large meal?
 
-First, run the development server:
+## How to Play
+
+1. **Guess Correctly:** Study the picture carefully and decide if the cat is pregnant or merely enjoying a few too many treats.
+   
+2. **Score Points:** Answer correctly and earn points! Bragging rights await those with the keenest eye for feline physiques.
+   
+3. **Learn and Laugh:** Whether you're right or wrong, you're sure to enjoy the adorable cat pics and maybe even learn a thing or two about cat anatomy.
+
+## Technology Used
+
+This quiz game is built using Next.js and utilizes the Next.js 13's App Router for smooth navigation. To get started, ensure you have [Yarn](https://yarnpkg.com/) installed to manage dependencies and run the application seamlessly.
+
+## How to Run Locally
+
+1. Clone this repository to your local machine.
+2. Navigate to the project directory.
+3. Install dependencies using Yarn:
 
 ```bash
-npm run dev
-# or
+yarn install
+```
+4. Start the development server:
+
+```bash
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Open your browser and go to `http://localhost:3000` to play the game!
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Contribution
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-# kitten-or-food
+Feel free to contribute more quiz questions or suggest improvements. 
