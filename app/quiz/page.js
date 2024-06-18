@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { QuizContext } from "@/context/QuizContext";
 
 const images = [
   { src: "/images/fat-cat-1.webp", answer: "fat" },
@@ -26,6 +27,8 @@ export default function Quiz() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [answeredQuestions, setAnsweredQuestions] = useState([]);
+
+  const { setQuizData } = useContext(QuizContext);
 
   const router = useRouter();
 
@@ -52,14 +55,11 @@ export default function Quiz() {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
       router.push("/result");
-      localStorage.setItem(
-        "quizResult",
-        JSON.stringify({
-          score,
-          total: shuffledImages.length,
-          details: JSON.stringify(answeredQuestions),
-        })
-      );
+      setQuizData({
+        score,
+        total: shuffledImages.length,
+        details: JSON.stringify(answeredQuestions),
+      });
     }
   };
 

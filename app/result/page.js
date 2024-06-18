@@ -1,13 +1,14 @@
 "use client";
 
+import { useContext } from "react";
 import { useRouter } from "next/navigation";
+import { QuizContext } from "@/context/QuizContext";
 
 export default function Result() {
   const router = useRouter();
-  const quizResult = localStorage.getItem("quizResult");
-  const { score, total } = quizResult
-    ? JSON.parse(quizResult)
-    : { score: 0, total: 0 };
+  const { quizData } = useContext(QuizContext);
+
+  const { score, total } = quizData;
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white">
