@@ -31,6 +31,7 @@ export default function Home() {
         "bottom-left",
         "bottom-right",
         "top-center",
+        "bottom-center",
       ].map((position) => (
         <CatGif key={position} position={position} />
       ))}

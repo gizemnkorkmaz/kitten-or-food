@@ -1,12 +1,18 @@
 import Image from 'next/image';
 import Button from '@/components/Button';
 
-const InfoPage = ({ imageSrc, children, onContinue }) => {
+interface InfoPageProps {
+  imageSrc: string;
+  children: React.ReactNode;
+  onContinue: () => void;
+}
+
+function InfoPage({ imageSrc, children, onContinue }: InfoPageProps) {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#E6E6FA] text-purple-600 px-8">
       <div className="nyan-cat"></div>
       <h1 className="text-2xl font-bold mb-4 text-center">
-      purr-gnant or fluffy cat facts
+        purr-gnant or fluffy cat facts
       </h1>
       <div className="mb-8 w-full max-w-md border-4">
         <Image
@@ -28,6 +34,6 @@ const InfoPage = ({ imageSrc, children, onContinue }) => {
       </div>
     </div>
   );
-};
+}
 
 export default InfoPage;

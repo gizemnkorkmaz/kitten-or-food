@@ -54,6 +54,12 @@
   transform: translateX(-50%);
 }
 
+.cat-gif.left-center {
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+}
+
 .feedback-container {
   height: 50px;
   display: flex;
