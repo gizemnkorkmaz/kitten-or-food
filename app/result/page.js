@@ -58,11 +58,14 @@ export default function Result() {
       <p className="text-sm mb-8 max-w-[300px] text-center text-purple-700 italic">
         {scoreText}
       </p>
+      <p className="text-sm text-purple-700 font-bold">
+        <strong> Pawsome!!11</strong>
+      </p>
       <button
         onClick={() => router.push("/")}
-        className="underline text-purple-700 hover:text-purple-900 font-bold py-3 px-6 rounded text-[14px]"
+        className="underline text-purple-700 hover:text-purple-900 font-bold px-6 rounded text-[14px]"
       >
-        Pawsome, Play Again! 🧶
+        Play Again 🧶
       </button>
     </div>
   );

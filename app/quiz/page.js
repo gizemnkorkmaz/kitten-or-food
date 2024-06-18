@@ -95,19 +95,23 @@ export default function Quiz() {
               : "This cat's expecting a litter of cuteness! 🐾"}
           </p>
         )}
-        <Image src={currentImage.src} width={500} height={500} alt="Cat" />
+        <Image src={currentImage?.src} width={500} height={500} alt="Cat" />
       </div>
       <div className="flex flex-col gap-4 w-full max-w-md">
         <button
           onClick={() => handleAnswer("fat")}
-          className={`answer-button bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-md w-full`}
+          className={`answer-button bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-md w-full ${
+            answered && "opacity-50"
+          }`}
           disabled={answered}
         >
           Chubby Cat Conundrum (Fat)
         </button>
         <button
           onClick={() => handleAnswer("pregnant")}
-          className={`answer-button bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 px-6 rounded-md w-full`}
+          className={`answer-button bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 px-6 rounded-md w-full ${
+            answered && "opacity-50"
+          }`}
           disabled={answered}
         >
           Soon-to-be-Mommy Meow Mayhem (Pregnant)
