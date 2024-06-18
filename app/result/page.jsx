@@ -2,6 +2,7 @@
 import { useContext, useEffect, useState } from "react";
 import { QuizContext } from "@/context/QuizContext";
 import { useRouter } from "next/navigation";
+import Button from "@/components/Button";
 
 export default function Result() {
   const router = useRouter();
@@ -33,16 +34,17 @@ export default function Result() {
     }
   }, [quizData]);
 
+  const goHome = () => {
+    router.push("/");
+  };
+
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-pink-[#E6E6FA] text-purple-900">
         <h1 className="text-md font-bold">Loading...</h1>
-        <button
-          onClick={() => router.push("/")}
-          className="underline text-purple-700 hover:text-purple-900 font-bold py-3 px-6 rounded text-[14px]"
-        >
+        <Button onClick={() => goHome()} variant="primary">
           Start Again
-        </button>
+        </Button>
       </div>
     );
   }
@@ -50,23 +52,17 @@ export default function Result() {
   const { score, total } = quizData;
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-[#E6E6FA] text-purple-900">
-      <h1 className="text-3xl font-bold mb-8">Cat-tastic Results!</h1>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-[#E6E6FA] text-purple-900 max-w-[350px] m-auto">
+      <h1 className="text-xl font-bold mb-4">The cat-culation shows:</h1>
       <p className="text-xl mb-4">
-        Your Score: {score} / {total}
+        {score} out of {total}
       </p>
       <p className="text-sm mb-8 max-w-[300px] text-center text-purple-700 italic">
         {scoreText}
       </p>
-      <p className="text-sm text-purple-700 font-bold">
-        <strong> Pawsome!!11</strong>
-      </p>
-      <button
-        onClick={() => router.push("/")}
-        className="underline text-purple-700 hover:text-purple-900 font-bold px-6 rounded text-[14px]"
-      >
-        Play Again 🧶
-      </button>
+      <Button onClick={() => goHome()} variant="ghost">
+        Fur-ward, replay!
+      </Button>
     </div>
   );
 }

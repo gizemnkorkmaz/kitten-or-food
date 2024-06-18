@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import { QuizProvider } from "@/context/QuizContext"
-import Footer from "@/components/Footer";
+import { QuizProvider } from "@/context/QuizContext";
 
 const poppins = Poppins({
   subsets: ["latin"],
-  weight: "400"
+  weight: "400",
 });
 
 export const metadata: Metadata = {
   title: "Kitten or Food? 🙀",
-  description: "Welcome to the Cat Quiz! You will be shown 5 images of cats, and your task is to guess if each cat is fat or pregnant.",
+  description:
+    "Welcome to the Cat Quiz! You will be shown 5 images of cats, and your task is to guess if each cat is fat or pregnant.",
 };
 
 export default function RootLayout({
@@ -21,10 +21,11 @@ export default function RootLayout({
 }>) {
   return (
     <QuizProvider>
-    <html lang="en">
-      <body className={poppins.className}>{children}</body>
-      <Footer />
-    </html>
+      <html lang="en">
+        <body className={poppins.className}>
+          {children}
+        </body>
+      </html>
     </QuizProvider>
   );
 }
