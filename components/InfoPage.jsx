@@ -5,8 +5,8 @@ const InfoPage = ({ imageSrc, children, onContinue }) => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#E6E6FA] text-purple-600 px-8">
       <div className="nyan-cat"></div>
-      <h1 className="text-lg font-bold mb-4 text-center">
-        Some facts
+      <h1 className="text-2xl font-bold mb-4 text-center">
+      purr-gnant or fluffy cat facts
       </h1>
       <div className="mb-8 w-full max-w-md border-4">
         <Image

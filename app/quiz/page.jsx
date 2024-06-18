@@ -36,7 +36,8 @@ export default function Quiz() {
   const [answerFeedback, setAnswerFeedback] = useState(null);
   const [answered, setAnswered] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
-  const [infoCount, setInfoCount] = useState(0); 
+  const [infoCount, setInfoCount] = useState(0);
+  const [currentHint, setCurrentHint] = useState(0);
 
   const { setQuizData } = useContext(QuizContext);
 
@@ -65,6 +66,7 @@ export default function Quiz() {
         setInfoCount(infoCount + 1);
         if (infoCount < 3 && (currentQuestionIndex + 1) % 3 === 0) {
           setShowInfo(true);
+          setCurrentHint(currentHint === 0 ? 0 : currentHint + 1);
         } else {
           setShowInfo(false);
         }
@@ -93,12 +95,11 @@ export default function Quiz() {
   const currentImage = shuffledImages[currentQuestionIndex];
 
   if (showInfo) {
-    const hint = hints[infoCount/3];
-    console.log(infoCount, hint);
+    const hint = hints[currentHint];
+    console.log(currentHint, hint);
     return (
       <InfoPage
         imageSrc={currentImage.src}
-        hint={hints[hint]}
         onContinue={handleContinue}
       >{hint}</InfoPage>
     );
