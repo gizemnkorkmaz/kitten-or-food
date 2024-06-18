@@ -27,9 +27,10 @@ export default function Quiz() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [answeredQuestions, setAnsweredQuestions] = useState([]);
+  const [answerFeedback, setAnswerFeedback] = useState(null);
+  const [answered, setAnswered] = useState(false);
 
   const { setQuizData } = useContext(QuizContext);
-
   const router = useRouter();
 
   useEffect(() => {
@@ -38,29 +39,29 @@ export default function Quiz() {
 
   const handleAnswer = (answer) => {
     const currentImage = shuffledImages[currentQuestionIndex];
-    if (answer === currentImage.answer) {
-      setScore(score + 1);
-      setAnsweredQuestions([
-        ...answeredQuestions,
-        { ...currentImage, correct: true },
-      ]);
-    } else {
-      setAnsweredQuestions([
-        ...answeredQuestions,
-        { ...currentImage, correct: false },
-      ]);
-    }
+    const isCorrect = answer === currentImage.answer;
+    setScore(score + (isCorrect ? 1 : 0));
+    setAnswerFeedback(isCorrect);
+    setAnswered(true);
 
-    if (currentQuestionIndex < shuffledImages.length - 1) {
+    setTimeout(() => {
+      setAnswerFeedback(null);
       setCurrentQuestionIndex(currentQuestionIndex + 1);
-    } else {
-      router.push("/result");
-      setQuizData({
-        score,
-        total: shuffledImages.length,
-        details: JSON.stringify(answeredQuestions),
-      });
-    }
+      setAnswered(false);
+      if (currentQuestionIndex === shuffledImages.length - 1) {
+        router.push("/result");
+        setQuizData({
+          score,
+          total: shuffledImages.length,
+          details: JSON.stringify(answeredQuestions),
+        });
+      }
+    }, 2000);
+
+    setAnsweredQuestions([
+      ...answeredQuestions,
+      { ...currentImage, correct: isCorrect },
+    ]);
   };
 
   if (!shuffledImages.length) {
@@ -71,29 +72,43 @@ export default function Quiz() {
     );
   }
 
+  const currentImage = shuffledImages[currentQuestionIndex];
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#E6E6FA] text-purple-600 px-8">
       <h1 className="text-xl md:text-3xl font-bold mb-8 text-center">
         Kitten 🐾 or Food 🍔
       </h1>
-      <div className="mb-8 w-full max-w-md">
-        <Image
-          src={shuffledImages[currentQuestionIndex].src}
-          width={500}
-          height={500}
-          alt="Cat"
-        />
+      <div
+        className={`mb-8 w-full max-w-md border-4 ${
+          answerFeedback === true
+            ? "border-green-500 rounded"
+            : answerFeedback === false
+            ? "border-red-500 rounded"
+            : ""
+        }`}
+      >
+        {answerFeedback !== null && (
+          <p className="text-center text-md py-4 text-purple-400 italic">
+            {currentImage.answer === "fat"
+              ? "It's not fat, it's 'fluffy-boned'! 🍔"
+              : "This cat's expecting a litter of cuteness! 🐾"}
+          </p>
+        )}
+        <Image src={currentImage.src} width={500} height={500} alt="Cat" />
       </div>
       <div className="flex flex-col gap-4 w-full max-w-md">
         <button
           onClick={() => handleAnswer("fat")}
-          className="text-[12px] md:text-[14px] bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-md w-full"
+          className={`answer-button bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-md w-full`}
+          disabled={answered}
         >
           Chubby Cat Conundrum (Fat)
         </button>
         <button
           onClick={() => handleAnswer("pregnant")}
-          className="text-[12px] md:text-[14px] bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 px-6 rounded-md w-full"
+          className={`answer-button bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 px-6 rounded-md w-full`}
+          disabled={answered}
         >
           Soon-to-be-Mommy Meow Mayhem (Pregnant)
         </button>
