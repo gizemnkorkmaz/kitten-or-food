@@ -56,7 +56,7 @@ export default function Quiz() {
           details: JSON.stringify(answeredQuestions),
         });
       }
-    }, 2000);
+    }, 1000);
 
     setAnsweredQuestions([
       ...answeredQuestions,
@@ -76,45 +76,50 @@ export default function Quiz() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#E6E6FA] text-purple-600 px-8">
-      <h1 className="text-xl md:text-3xl font-bold mb-8 text-center">
+      <h1 className="text-xl md:text-3xl font-bold mb-2 text-center">
         Kitten 🐾 or Food 🍔
       </h1>
-      <div
-        className={`mb-8 w-full max-w-md border-4 ${
-          answerFeedback === true
-            ? "border-green-500 rounded"
-            : answerFeedback === false
-            ? "border-red-500 rounded"
-            : ""
-        }`}
-      >
-        {answerFeedback !== null && (
-          <p className="text-center text-md py-4 text-purple-400 italic">
-            {currentImage.answer === "fat"
-              ? "It's not fat, it's 'fluffy-boned'! 🍔"
-              : "This cat's expecting a litter of cuteness! 🐾"}
-          </p>
-        )}
-        <Image src={currentImage?.src} width={500} height={500} alt="Cat" />
+      <div className={`mb-8 w-full max-w-md border-4`}>
+        <div
+          className={`feedback-container ${
+            answerFeedback === null ? "hidden" : ""
+          }`}
+        >
+          {answerFeedback !== null && (
+            <p className="text-center pb-1 text-md text-purple-400 italic">
+              {currentImage.answer === "fat"
+                ? "It's not fat, it's 'fluffy-boned!"
+                : "This cat's expecting a litter of cuteness!"}
+              {answerFeedback ? " Nice job! ✅" : " Sorry! 🚨"}
+            </p>
+          )}
+        </div>
+        <Image
+          src={currentImage?.src}
+          width={500}
+          height={500}
+          alt="Cat"
+          className="rounded"
+        />
       </div>
       <div className="flex flex-col gap-4 w-full max-w-md">
         <button
           onClick={() => handleAnswer("fat")}
-          className={`answer-button bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-md w-full ${
+          className={`answer-button bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-md max-w-[300px] mx-auto w-full ${
             answered && "opacity-50"
           }`}
           disabled={answered}
         >
-          Chubby Cat Conundrum (Fat)
+          Food Inside
         </button>
         <button
           onClick={() => handleAnswer("pregnant")}
-          className={`answer-button bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 px-6 rounded-md w-full ${
+          className={`answer-button bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 px-6 rounded-md max-w-[300px] mx-auto w-full ${
             answered && "opacity-50"
           }`}
           disabled={answered}
         >
-          Soon-to-be-Mommy Meow Mayhem (Pregnant)
+          Kitten Inside
         </button>
       </div>
       <p className="mt-8 text-xl">
