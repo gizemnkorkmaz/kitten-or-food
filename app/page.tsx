@@ -38,7 +38,7 @@ export default function Home() {
       <div className="bg-pink-100 p-8 rounded-md shadow-lg max-w-[450px]">
         <Header />
         <p className="text-[14px] sm:text-md mb-8 text-gray-700">
-          Welcome to the Cat Quiz! You will be shown 5 images of cats, and your
+          Welcome to the Cat Quiz! You will be shown 10 images of cats, and your
           task is to guess if each cat is fat or pregnant.
         </p>
         <Button onClick={startQuiz} variant="primary" >

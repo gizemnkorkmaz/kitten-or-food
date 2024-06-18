@@ -29,47 +29,66 @@ export default function Quiz() {
     setShuffledImages(shuffleArray([...images]));
   }, []);
 
+  useEffect(() => {
+    if (answered && currentQuestionIndex < shuffledImages.length) {
+      const timer = setTimeout(handleNextQuestion, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [answered]);
+
   const handleAnswer = (answer) => {
     const currentImage = shuffledImages[currentQuestionIndex];
     const isCorrect = answer === currentImage.answer;
+
     setScore((prevScore) => prevScore + (isCorrect ? 1 : 0));
     setAnswerFeedback(isCorrect);
     setAnswered(true);
     setSelectedAnswer(answer);
-
-    setTimeout(() => {
-      setAnswerFeedback(null);
-      setSelectedAnswer(null);
-      if (currentQuestionIndex === shuffledImages.length - 1) {
-        setQuizData({
-          score,
-          total: shuffledImages.length,
-          details: JSON.stringify(answeredQuestions),
-        });
-        router.push("/result");
-      } else {
-        setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-        setAnswered(false);
-        setInfoCount((prevCount) => prevCount + 1);
-        if (infoCount < 3 && (currentQuestionIndex + 1) % 3 === 0) {
-          setShowInfo(true);
-          setRandomInfoImage(shuffledImages[Math.floor(Math.random() * shuffledImages.length)]);
-          setCurrentHint((prevHint) => (prevHint === 0 ? 0 : prevHint + 1));
-        } else {
-          setShowInfo(false);
-        }
-      }
-    }, 1000);
-
     setAnsweredQuestions((prevQuestions) => [
       ...prevQuestions,
       { ...currentImage, correct: isCorrect },
     ]);
   };
 
+  const handleNextQuestion = () => {
+    if (currentQuestionIndex === shuffledImages.length - 1) {
+      setQuizData({
+        score,
+        total: shuffledImages.length,
+        details: JSON.stringify(answeredQuestions),
+      });
+      router.push("/result");
+    } else {
+      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+      setAnswered(false);
+      setAnswerFeedback(null);
+      setSelectedAnswer(null);
+      handleShowInfo();
+    }
+  };
+
+  const handleShowInfo = () => {
+    if (infoCount < 3 && (currentQuestionIndex + 1) % 3 === 0) {
+      setShowInfo(true);
+      setRandomInfoImage(shuffledImages[Math.floor(Math.random() * shuffledImages.length)]);
+      setCurrentHint((prevHint) => prevHint + 1);
+      setInfoCount((prevCount) => prevCount + 1);
+    } else {
+      setShowInfo(false);
+    }
+  };
+
   const handleContinue = () => {
     setShowInfo(false);
     setInfoCount(0);
+  };
+
+  const getButtonWrapperClass = (answer) => {
+    if (!answered) return "";
+    if (selectedAnswer === answer) {
+      return answerFeedback ? "rounded-lg border-4 border-green-500" : "rounded-md border-4 border-red-500";
+    }
+    return currentImage.answer === answer ? "rounded-lg border-4 border-green-500" : "";
   };
 
   if (!shuffledImages.length) {
@@ -90,17 +109,6 @@ export default function Quiz() {
       </InfoPage>
     );
   }
-
-  const getButtonWrapperClass = (answer) => {
-    if (!answered) return "";
-    if (selectedAnswer === answer) {
-      return answerFeedback ? "rounded-lg border-4 border-green-500" : "rounded-md border-4 border-red-500";
-    }
-    if (currentImage.answer === answer) {
-      return "rounded-lg border-4 border-green-500";
-    }
-    return "";
-  };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#E6E6FA] text-purple-600 px-8">
@@ -128,22 +136,17 @@ export default function Quiz() {
         )}
       </div>
       <div className="flex flex-col gap-4 w-full max-w-md">
+        {["fat", "pregnant"].map((answer) => (
           <Button
-            onClick={() => handleAnswer("fat")}
-            variant="primary"
+            key={answer}
+            onClick={() => handleAnswer(answer)}
+            variant={answer === "fat" ? "primary" : "secondary"}
             disabled={answered}
-            className={getButtonWrapperClass("fat")}
+            className={getButtonWrapperClass(answer)}
           >
-            Food Inside
+            {answer === "fat" ? "Food Inside" : "Kitten Inside"}
           </Button>
-          <Button
-            onClick={() => handleAnswer("pregnant")}
-            variant="secondary"
-            disabled={answered}
-            className={getButtonWrapperClass("pregnant")}
-          >
-            Kitten Inside
-          </Button>
+        ))}
       </div>
       <p className="mt-8 text-xl">
         Clawzical Inquiry {currentQuestionIndex + 1} of {shuffledImages.length}
