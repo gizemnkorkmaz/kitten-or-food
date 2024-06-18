@@ -42,6 +42,18 @@
   right: 20px;
 }
 
+.cat-gif.top-center {
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.cat-gif.bottom-center {
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .feedback-container {
   height: 50px;
   display: flex;
@@ -52,6 +64,38 @@
 
 .feedback-container.hidden {
   opacity: 0;
+}
+
+@keyframes move-rectangular {
+  0% {
+    top: 0;
+    left: 0;
+  }
+  25% {
+    top: 0;
+    left: calc(100% - 35px);
+  }
+  50% {
+    top: calc(100% - 15px);
+    left: calc(100% - 35px);
+  }
+  75% {
+    top: calc(100% - 15px);
+    left: 0;
+  }
+  100% {
+    top: 0;
+    left: 0;
+  }
+}
+
+.nyan-cat {
+  position: fixed;
+  width: 35px;
+  height: 15px;
+  background-image: url('/images/nyan-cat.gif');
+  background-size: contain;
+  animation: move-rectangular 10s linear infinite;
 }
 
 

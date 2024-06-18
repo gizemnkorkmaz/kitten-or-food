@@ -27,7 +27,7 @@ export default function Home() {
 
   return (
     <main className="flex flex-col items-center justify-center rounded-md p-4 sm:p-8 text-center h-[100vh]">
-      {["top-left", "top-right", "bottom-left", "bottom-right"].map((position) => (
+      {["top-left", "top-right", "bottom-left", "bottom-right", "top-center", "bottom-center"].map((position) => (
         <CatGif key={position} position={position} />
       ))}
       <div className="bg-pink-100 p-8 rounded-md shadow-lg max-w-[600px]">

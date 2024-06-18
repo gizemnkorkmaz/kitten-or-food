@@ -76,6 +76,9 @@ export default function Quiz() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#E6E6FA] text-purple-600 px-8">
+      <div className="nyan-cat"></div>
+      <div className="nyan-cat"></div>
+      <div className="nyan-cat"></div>
       <h1 className="text-xl md:text-3xl font-bold mb-2 text-center">
         Kitten 🐾 or Food 🍔
       </h1>

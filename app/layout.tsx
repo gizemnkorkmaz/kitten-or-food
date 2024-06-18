@@ -9,7 +9,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Fat or Pregnant? 🙀",
+  title: "Kitten or Food? 🙀",
   description: "Welcome to the Cat Quiz! You will be shown 5 images of cats, and your task is to guess if each cat is fat or pregnant.",
 };
 
