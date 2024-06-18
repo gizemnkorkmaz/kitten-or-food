@@ -65,18 +65,18 @@ export default function Quiz() {
 
   if (!shuffledImages.length) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
+      <div className="flex items-center justify-center min-h-screen bg-gray-100 text-gray-800">
         Loading...
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-pink-[#E6E6FA] text-purple-600">
       <h1 className="text-3xl md:text-6xl font-bold mb-8 text-center">
         Cat Quiz
       </h1>
-      <div className="mb-8">
+      <div className="mb-8 w-full max-w-md">
         <Image
           src={shuffledImages[currentQuestionIndex].src}
           width={500}
@@ -84,16 +84,16 @@ export default function Quiz() {
           alt="Cat"
         />
       </div>
-      <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+      <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 w-full max-w-md">
         <button
           onClick={() => handleAnswer("fat")}
-          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded w-full md:w-auto"
+          className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded w-full"
         >
           Fat
         </button>
         <button
           onClick={() => handleAnswer("pregnant")}
-          className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded w-full md:w-auto"
+          className="bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 px-6 rounded w-full"
         >
           Pregnant
         </button>
