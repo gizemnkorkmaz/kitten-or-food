@@ -73,7 +73,9 @@ export default function Quiz() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white">
-      <h1 className="text-6xl font-bold mb-8">Cat Quiz</h1>
+      <h1 className="text-3xl md:text-6xl font-bold mb-8 text-center">
+        Cat Quiz
+      </h1>
       <div className="mb-8">
         <Image
           src={shuffledImages[currentQuestionIndex].src}
@@ -82,16 +84,16 @@ export default function Quiz() {
           alt="Cat"
         />
       </div>
-      <div className="flex space-x-4">
+      <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
         <button
           onClick={() => handleAnswer("fat")}
-          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded"
+          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded w-full md:w-auto"
         >
           Fat
         </button>
         <button
           onClick={() => handleAnswer("pregnant")}
-          className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded"
+          className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded w-full md:w-auto"
         >
           Pregnant
         </button>
@@ -99,6 +101,12 @@ export default function Quiz() {
       <p className="mt-8 text-xl">
         Question {currentQuestionIndex + 1} of {shuffledImages.length}
       </p>
+      <button
+        onClick={() => router.push("/")}
+        className="mt-8 bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded"
+      >
+        Back Home
+      </button>
     </div>
   );
 }
