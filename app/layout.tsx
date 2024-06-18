@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { QuizProvider } from "@/context/QuizContext"
+import Footer from "@/components/Footer";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -22,6 +23,7 @@ export default function RootLayout({
     <QuizProvider>
     <html lang="en">
       <body className={poppins.className}>{children}</body>
+      <Footer />
     </html>
     </QuizProvider>
   );
