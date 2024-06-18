@@ -1,12 +1,21 @@
 import clsx from 'clsx';
 
+interface ButtonProps {
+  children: React.ReactNode;
+  onClick: () => void;
+  variant: 'primary' | 'secondary' | 'ghost';
+  disabled?: boolean;
+  className?: string;
+}
+
 const Button = ({
   children,
   onClick,
   variant = 'primary',
   disabled = false,
+  className,
   ...props
-}) => {
+}: ButtonProps) => {
   const baseStyles = 'font-bold py-3 px-6 rounded-md w-full mx-auto w-full';
 
   const variants = {
@@ -20,6 +29,7 @@ const Button = ({
     baseStyles,
     variants[variant],
     disabled && 'opacity-50 cursor-not-allowed',
+    className
   );
 
   return (
